@@ -40,7 +40,7 @@ Write a Python program with OpenCV that takes a picture from the webcam and then
 
 ## Program
 
-#### 1. Import the libraries
+#### 1.
 
 ```python
 import cv2
@@ -49,101 +49,99 @@ from IPython.display import clear_output
 import time
 ```
 
-#### 2. Grab one frame and save it
+#### 2.
 
 ```python
-cam = cv2.VideoCapture(0)
-ok, frame = cam.read()
-if ok:
+cap = cv2.VideoCapture(0)
+ret, frame = cap.read()
+if ret:
     cv2.imwrite("captured_frame.jpg", frame)
-cam.release()
+cap.release()
 ```
 
-#### 3. Read the saved frame
+#### 3.
 
 ```python
-saved = cv2.imread("captured_frame.jpg")
+captured_image = cv2.imread('captured_frame.jpg')
 ```
 
-#### 4. Display the captured frame
+#### 4.
 
 ```python
-plt.imshow(saved[:, :, ::-1])
-plt.title("Captured Frame")
-plt.axis("off")
+plt.imshow(captured_image[:,:,::-1])
+plt.title('Captured Frame')
+plt.axis('off')
 plt.show()
 ```
 
-#### 5. Show the video
+#### 5.
 
 ```python
-cam = cv2.VideoCapture(0)
-for n in range(30):
-    ok, frame = cam.read()
-    if not ok:
+cap = cv2.VideoCapture(0)
+
+for i in range(50):
+    ret, frame = cap.read()
+    if not ret:
         break
-    rgb = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
+    frame_rgb = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
     clear_output(wait=True)
-    plt.imshow(rgb)
-    plt.axis("off")
+    plt.imshow(frame_rgb)
+    plt.axis('off')
     plt.show()
     time.sleep(0.05)
-cam.release()
+
+cap.release()
 ```
 
-#### 6. Show it in a smaller window
+#### 6.
 
 ```python
-cam = cv2.VideoCapture(0)
-for n in range(30):
-    ok, frame = cam.read()
-    if not ok:
+cap = cv2.VideoCapture(0)
+
+for i in range(50):
+    ret, frame = cap.read()
+    if not ret:
         break
-    rgb = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
+    resized_frame = cv2.resize(frame, (100, 150))
+    frame_rgb = cv2.cvtColor(resized_frame, cv2.COLOR_BGR2RGB)
     clear_output(wait=True)
-    plt.figure(figsize=(5, 3))
-    plt.imshow(rgb)
-    plt.axis("off")
+    plt.imshow(frame_rgb)
+    plt.axis('off')
     plt.show()
     time.sleep(0.05)
-cam.release()
+
+cap.release()
 ```
 
-#### 7. Rotate the video and show it
+#### 7.
 
 ```python
-cam = cv2.VideoCapture(0)
-for n in range(30):
-    ok, frame = cam.read()
-    if not ok:
+cap = cv2.VideoCapture(0)
+
+for i in range(50):
+    ret, frame = cap.read()
+    if not ret:
         break
-    turned = cv2.rotate(frame, cv2.ROTATE_90_CLOCKWISE)
-    rgb = cv2.cvtColor(turned, cv2.COLOR_BGR2RGB)
+    rotated_frame = cv2.rotate(frame, cv2.ROTATE_90_CLOCKWISE)
+    frame_rgb = cv2.cvtColor(rotated_frame, cv2.COLOR_BGR2RGB)
     clear_output(wait=True)
-    plt.imshow(rgb)
-    plt.axis("off")
+    plt.imshow(frame_rgb)
+    plt.axis('off')
     plt.show()
     time.sleep(0.05)
-cam.release()
+
+cap.release()
 ```
 
 ## Output
 
-### i) Saved frame
-
 <img width="630" height="384" alt="Captured Frame" src="output/01-captured-frame.png" />
 
-### ii) Video
+<img width="630" height="384" alt="Video" src="output/02-video-frame.png" />
 
-<img width="630" height="363" alt="Video frame" src="output/02-video-frame.png" />
+<img width="100" height="150" alt="Smaller window" src="output/03-resized-window.png" />
 
-### iii) Smaller window
-
-<img width="490" height="284" alt="Resized window" src="output/03-resized-window.png" />
-
-### iv) Rotated video
-
-<img width="273" height="470" alt="Rotated frame" src="output/04-rotated.png" />
+<img width="384" height="630" alt="Rotated" src="output/04-rotated.png" />
 
 ## Result
 
